@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AutoPhoneCall</string>
+    <string name="call_to_number">Call to Number:</string>
+    <string name="receive_sms_from">SMS from:</string>
+    <string name="gate_number">Gate Number</string>
+    <string name="sms_sender">SMS sender</string>
+    <string name="target_phone">target phone</string>
+    <string name="source_phone">source phone</string>
+</resources>
