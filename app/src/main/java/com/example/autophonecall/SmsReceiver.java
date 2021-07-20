@@ -26,7 +26,8 @@ public class SmsReceiver extends BroadcastReceiver {
                     String sender = message[0].getOriginatingAddress();
                     String msgBody = message[0].getMessageBody();
 
-                    if(MainActivity.getSenderNumber().equals(sender) && "Open".equals(msgBody)) {
+                    if("Open".equals(msgBody) && (MainActivity.getSender1Number().equals(sender) ||
+                        MainActivity.getSender2Number().equals(sender))) {
                         PhoneCaller phoneCaller = new PhoneCaller();
                         phoneCaller.makePhoneCall(context, MainActivity.getTargetPhone());
                     }

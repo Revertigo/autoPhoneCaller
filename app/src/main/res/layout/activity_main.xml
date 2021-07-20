@@ -19,16 +19,28 @@
         app:layout_constraintVertical_bias="0.087" />
 
     <TextView
-        android:id="@+id/smsFrom"
+        android:id="@+id/smsFrom1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/receive_sms_from"
+        android:text="@string/receive_sms_from1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.092"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.226" />
+
+    <TextView
+        android:id="@+id/smsFrom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/receive_sms_from2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.365" />
 
     <EditText
         android:id="@+id/callToTextBox"
@@ -45,7 +57,7 @@
         app:layout_constraintVertical_bias="0.089" />
 
     <EditText
-        android:id="@+id/smsFromTextBox"
+        android:id="@+id/smsFromTextBox1"
         android:layout_width="207dp"
         android:layout_height="39dp"
         android:ems="10"
@@ -58,5 +70,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.232" />
+
+    <EditText
+        android:id="@+id/smsFromTextBox2"
+        android:layout_width="207dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="@string/sms_sender"
+        android:inputType="text"
+        android:text="@string/source_phone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.671"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.375" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

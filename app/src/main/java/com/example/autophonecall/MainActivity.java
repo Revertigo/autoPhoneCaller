@@ -16,9 +16,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 5469;
+    private static final String CALL_TO = "callTo";
+    private static final String SMS_SENDER1 = "smsSender1";
+    private static final String SMS_SENDER2 = "smsSender2";
 
     static TextView callTo = null;
-    static TextView smsSender = null;
+    static TextView smsSender1 = null;
+    static TextView smsSender2 = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,18 +31,25 @@ public class MainActivity extends AppCompatActivity {
 
         //Get handler to the views
         callTo = findViewById(R.id.callToTextBox);
-        smsSender = findViewById(R.id.smsFromTextBox);
+        smsSender1 = findViewById(R.id.smsFromTextBox1);
+        smsSender2 = findViewById(R.id.smsFromTextBox2);
 
-        String targetPhone = readFromPreferences("callTo");
+        String targetPhone = readFromPreferences(CALL_TO);
         if(targetPhone != null)
         {
             callTo.setText(targetPhone);
         }
 
-        String smsSource = readFromPreferences("smsSender");
-        if(smsSource != null)
+        String smsSource1 = readFromPreferences(SMS_SENDER1);
+        if(smsSource1 != null)
         {
-            smsSender.setText(smsSource);
+            smsSender1.setText(smsSource1);
+        }
+
+        String smsSource2 = readFromPreferences(SMS_SENDER2);
+        if(smsSource2 != null)
+        {
+            smsSender2.setText(smsSource2);
         }
         callTo.setOnEditorActionListener(
                 (v, actionId, event) -> {
@@ -49,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                                     event.getAction() == KeyEvent.ACTION_DOWN &&
                                     event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                         if (event == null || !event.isShiftPressed()) {
-                            storeToPreferences("callTo", v.getText().toString());
+                            storeToPreferences(CALL_TO, v.getText().toString());
                             Toast.makeText(this, "Target phone number successfully saved", Toast.LENGTH_LONG).show();
 
                             return true; // consume.
@@ -59,7 +70,26 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        smsSender.setOnEditorActionListener(
+        smsSender1.setOnEditorActionListener(
+                (v, actionId, event) -> {
+                    if (actionId == EditorInfo.IME_ACTION_NEXT ||
+                            actionId == EditorInfo.IME_ACTION_SEARCH ||
+                            actionId == EditorInfo.IME_ACTION_DONE ||
+                            event != null &&
+                                    event.getAction() == KeyEvent.ACTION_DOWN &&
+                                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                        if (event == null || !event.isShiftPressed()) {
+                            storeToPreferences(SMS_SENDER1, v.getText().toString());
+                            Toast.makeText(this, "Source phone #1 successfully saved", Toast.LENGTH_LONG).show();
+
+                            return true; // consume.
+                        }
+                    }
+                    return false; // pass on to other listeners.
+                }
+        );
+
+        smsSender2.setOnEditorActionListener(
                 (v, actionId, event) -> {
                     if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                             actionId == EditorInfo.IME_ACTION_DONE ||
@@ -67,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
                                     event.getAction() == KeyEvent.ACTION_DOWN &&
                                     event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
                         if (event == null || !event.isShiftPressed()) {
-                            storeToPreferences("smsSender", v.getText().toString());
-                            Toast.makeText(this, "Source phone number successfully saved", Toast.LENGTH_LONG).show();
+                            storeToPreferences(SMS_SENDER2, v.getText().toString());
+                            Toast.makeText(this, "Source phone #2 successfully saved", Toast.LENGTH_LONG).show();
 
                             return true; // consume.
                         }
@@ -111,9 +141,15 @@ public class MainActivity extends AppCompatActivity {
         return callTo.getText().toString();
     }
     //Get the phone number of the caller
-    static String getSenderNumber()
+    static String getSender1Number()
     {
-        return smsSender.getText().toString();
+        return smsSender1.getText().toString();
+    }
+
+    //Get the phone number of the caller
+    static String getSender2Number()
+    {
+        return smsSender2.getText().toString();
     }
 
     void storeToPreferences(String key, String value)
