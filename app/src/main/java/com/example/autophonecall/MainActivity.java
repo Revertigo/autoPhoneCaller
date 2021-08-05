@@ -16,13 +16,16 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static int ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE = 5469;
+
     private static final String CALL_TO = "callTo";
     private static final String SMS_SENDER1 = "smsSender1";
     private static final String SMS_SENDER2 = "smsSender2";
+    private static final String CODE_WORD = "codeWord";
 
     static TextView callTo = null;
     static TextView smsSender1 = null;
     static TextView smsSender2 = null;
+    static TextView codeWord = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         callTo = findViewById(R.id.callToTextBox);
         smsSender1 = findViewById(R.id.smsFromTextBox1);
         smsSender2 = findViewById(R.id.smsFromTextBox2);
+        codeWord = findViewById(R.id.codeWordTextBox);
 
         String targetPhone = readFromPreferences(CALL_TO);
         if(targetPhone != null)
@@ -51,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         {
             smsSender2.setText(smsSource2);
         }
+
+        String codeWordTrigger = readFromPreferences(CODE_WORD);
+        if(codeWordTrigger != null)
+        {
+            codeWord.setText(codeWordTrigger);
+        }
+
         callTo.setOnEditorActionListener(
                 (v, actionId, event) -> {
                     if (actionId == EditorInfo.IME_ACTION_NEXT ||
@@ -91,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
         smsSender2.setOnEditorActionListener(
                 (v, actionId, event) -> {
-                    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                    if (actionId == EditorInfo.IME_ACTION_NEXT ||
+                            actionId == EditorInfo.IME_ACTION_SEARCH ||
                             actionId == EditorInfo.IME_ACTION_DONE ||
                             event != null &&
                                     event.getAction() == KeyEvent.ACTION_DOWN &&
@@ -99,6 +111,24 @@ public class MainActivity extends AppCompatActivity {
                         if (event == null || !event.isShiftPressed()) {
                             storeToPreferences(SMS_SENDER2, v.getText().toString());
                             Toast.makeText(this, "Source phone #2 successfully saved", Toast.LENGTH_LONG).show();
+
+                            return true; // consume.
+                        }
+                    }
+                    return false; // pass on to other listeners.
+                }
+        );
+
+        codeWord.setOnEditorActionListener(
+                (v, actionId, event) -> {
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                            actionId == EditorInfo.IME_ACTION_DONE ||
+                            event != null &&
+                                    event.getAction() == KeyEvent.ACTION_DOWN &&
+                                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                        if (event == null || !event.isShiftPressed()) {
+                            storeToPreferences(CODE_WORD, v.getText().toString());
+                            Toast.makeText(this, "Code word successfully saved", Toast.LENGTH_LONG).show();
 
                             return true; // consume.
                         }
@@ -140,18 +170,20 @@ public class MainActivity extends AppCompatActivity {
     {
         return callTo.getText().toString();
     }
-    //Get the phone number of the caller
+    //Get the phone number of sender #1
     static String getSender1Number()
     {
         return smsSender1.getText().toString();
     }
-
-    //Get the phone number of the caller
+    //Get the phone number of sender #2
     static String getSender2Number()
     {
         return smsSender2.getText().toString();
     }
+    //Get the code word
+    static String getCodeWord() { return codeWord.getText().toString();}
 
+    //Store data to none-volatile memory
     void storeToPreferences(String key, String value)
     {
         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
@@ -159,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    //Read data from none-volatile memory
     String readFromPreferences(String key)
     {
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);

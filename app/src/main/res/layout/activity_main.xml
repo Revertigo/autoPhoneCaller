@@ -42,48 +42,76 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.365" />
 
+    <TextView
+        android:id="@+id/codeWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/code_word"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
     <EditText
         android:id="@+id/callToTextBox"
-        android:layout_width="207dp"
+        android:layout_width="212dp"
         android:layout_height="39dp"
-        android:hint="@string/gate_number"
+        android:ems="10"
+        android:hint="@string/target_phone"
         android:inputType="text"
-        android:text="@string/target_phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.089"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/smsFromTextBox1"
-        android:layout_width="207dp"
+        android:layout_width="212dp"
         android:layout_height="39dp"
         android:ems="10"
-        android:hint="@string/sms_sender"
+        android:hint="@string/source_phone"
         android:inputType="text"
-        android:text="@string/source_phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintVertical_bias="0.232"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/smsFromTextBox2"
-        android:layout_width="207dp"
+        android:layout_width="212dp"
         android:layout_height="39dp"
         android:ems="10"
-        android:hint="@string/sms_sender"
+        android:hint="@string/source_phone"
         android:inputType="text"
-        android:text="@string/source_phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintVertical_bias="0.375"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/codeWordTextBox"
+        android:layout_width="212dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:hint="@string/what_will_trigger_phone_call"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.671"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.513"
+        android:autofillHints="@string/what_will_trigger_phone_call"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
